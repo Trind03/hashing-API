@@ -1,7 +1,9 @@
-import server
-
+from server import server
 
 def main() -> int:
     Server: server = server()
-    server.Running()
-    return 
+    Server.Running()
+    return 0
+
+
+main()

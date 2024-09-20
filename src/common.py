@@ -2,6 +2,9 @@ import socket
 
 class internet_computer:
     def __init__(self,IP,PORT) -> None:
+        self.AUTH_TOKEN = ""
+
+        self._Header = 64
         self._IP = IP
         self._PORT = PORT
         self._IP_FAMILY = socket.AF_INET
