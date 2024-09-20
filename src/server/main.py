@@ -1,6 +1,8 @@
-from sys import path
-path.append("..")
-import common
 import socket
+import server
 
-print("HELlo World!")
+
+def main() -> int:
+    
+
+    return 0
