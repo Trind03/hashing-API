@@ -5,7 +5,7 @@ class internet_computer:
         self._IP = IP
         self._PORT = PORT
         self._IP_FAMILY = socket.AF_INET
-        self.PROTOCOL = socket.SOCK_STREAM
+        self._PROTOCOL = socket.SOCK_STREAM
 
 
     def __del__(self) -> None:
