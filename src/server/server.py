@@ -4,8 +4,8 @@ sys.path.append("../")
 import common
 
 class server(common.internet_computer): 
-    def __init__(self) -> None:
-        super().__init__("127.0.0.1",8734)
+    def __init__(self, IP_,PORT_) -> None:
+        super().__init__(IP_,PORT_)
         self.Sock = socket.socket(self._IP_FAMILY,self._PROTOCOL)
         self.Sock.bind((self._IP,self._PORT))
         self._Running = True
@@ -13,6 +13,7 @@ class server(common.internet_computer):
 
     def __del__(self) -> None:
         self._Running = False
+        self.Sock.shutdown()
         self.Sock.close()
 
     def Connection_handler(self) -> None:
@@ -28,4 +29,4 @@ class server(common.internet_computer):
 
         while(self._Running):
             self.Connection_handler()
-            
+            print(self.Sock.recv(13))
