@@ -18,9 +18,9 @@ class server(common.internet_computer):
     def Connection_handler(self) -> None:
         Sock, Addr = self.Sock.accept()
     
-        if(Sock.recv(self._Header) == self.AUTH_TOKEN):
-            print(f"Connections Established with verified client: {Addr}")
-            self.Active_connections.append((Sock,Addr))
+        #if(Sock.recv(self._Header) == self.AUTH_TOKEN):
+            #print(f"Connections Established with verified client: {Addr}")
+            #self.Active_connections.append((Sock,Addr))
 
 
     def Running(self):
