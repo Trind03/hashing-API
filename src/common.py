@@ -1,4 +1,6 @@
 import socket
+import pickle
+
 
 class internet_computer:
     def __init__(self,IP,PORT) -> None:
@@ -18,7 +20,14 @@ class internet_computer:
         DATA = str(self._Header)
         return DATA.ljust(TARGETS)
         
-
+    def Process_metadata(self,data):
+        Serialized_data = pickle.dumps(data)
+        myset:tuple = (len(Serialized_data),Serialized_data)
+        return myset
+    
+    
+    def Load_metadata(data):
+        return pickle.loads(data)
 
 
     def __del__(self) -> None:

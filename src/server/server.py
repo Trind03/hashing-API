@@ -1,5 +1,4 @@
 import socket
-import pickle
 import sys
 sys.path.append("../")
 import common
@@ -15,10 +14,6 @@ class server(common.internet_computer):
     def __del__(self) -> None:
         self._Running = False
         self.Sock.close()
-
-    def Process_metadata(self,data) -> str:
-        Serialized_data = pickle.dumps(data)
-        return Serialized_data.hex()
 
     def Connection_handler(self) -> None:
         self.Sock.listen(1)
