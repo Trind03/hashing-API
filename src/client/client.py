@@ -10,9 +10,11 @@ class client(internet_computer):
         super().__init__(IP_,PORT_)
         self._Sock = socket.socket(self._IP_FAMILY,self._PROTOCOL)
         self._Running = True
+        self.data = input("> ")
 
     def Startup(self):
-        self._Sock.connect((self._IP,self._PORT))
+        self._Sock.connect(("localhost",self._PORT))
+        self._Sock.send(self.data.encode())
 
     def Running(self):
         while(self._Running):
@@ -20,4 +22,5 @@ class client(internet_computer):
 
 
     def __del__(self):
-        ...
+        self._Sock.close()
+        self._Running = False

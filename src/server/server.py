@@ -1,4 +1,5 @@
 import socket
+import pickle
 import sys
 sys.path.append("../")
 import common
@@ -13,11 +14,16 @@ class server(common.internet_computer):
 
     def __del__(self) -> None:
         self._Running = False
-        self.Sock.shutdown()
         self.Sock.close()
 
+    def Process_metadata(self,data) -> str:
+        Serialized_data = pickle.dumps(data)
+        return Serialized_data.hex()
+
     def Connection_handler(self) -> None:
+        self.Sock.listen(1)
         Sock, Addr = self.Sock.accept()
+
     
         #if(Sock.recv(self._Header) == self.AUTH_TOKEN):
             #print(f"Connections Established with verified client: {Addr}")
@@ -25,8 +31,4 @@ class server(common.internet_computer):
 
 
     def Running(self):
-        self.Sock.listen()
-
-        while(self._Running):
-            self.Connection_handler()
-            print(self.Sock.recv(13))
+        ...
