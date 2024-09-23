@@ -1,4 +1,4 @@
-import socket
+from socket import socket
 import pickle
 from enum import Enum
 
@@ -20,6 +20,12 @@ class internet_computer:
         self._PORT = PORT
         self._IP_FAMILY = socket.AF_INET
         self._PROTOCOL = socket.SOCK_STREAM
+
+    def recv(self,Sock: socket) -> tuple:
+        length:int = int(Sock.recv(self._Header))
+        data: str = Sock.recv(length)
+        
+        return (length, data)
 
 
     # Protocol will first broadcast a header: size of data. This function pads out the header with ' ' to match expected size.
