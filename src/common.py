@@ -1,11 +1,12 @@
 import socket
 import pickle
-from abc import ABC
 from enum import Enum
 
 class flags(Enum):
-    Disconnect: str = ""
-    Ping: str = ""
+    Disconnect: str = "bb6061a7427f7aef42eb0f490e12adc1"
+    Echo: str = "e4d2beebd876c24156b0c9deb5880e4d"
+    Ping: str = "6415f7b4ef5dcfaa28e0a0209cf0b43a"
+
 
 
 
