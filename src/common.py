@@ -1,5 +1,12 @@
 import socket
 import pickle
+from abc import ABC
+from enum import Enum
+
+class flags(Enum):
+    Disconnect: str = ""
+    Ping: str = ""
+
 
 
 class internet_computer:
