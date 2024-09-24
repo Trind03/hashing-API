@@ -2,6 +2,7 @@ import socket
 import sys
 sys.path.append("../")
 import common
+from client import client
 
 class server(common.internet_computer): 
     def __init__(self, IP_,PORT_) -> None:
@@ -9,7 +10,7 @@ class server(common.internet_computer):
         self.Sock = socket.socket(self._IP_FAMILY,self._PROTOCOL)
         self.Sock.bind((self._IP,self._PORT))
         self._Running = True
-        self.Active_connections = []
+        self.Active_connections: list = []
 
     def __del__(self) -> None:
         self._Running = False
@@ -18,6 +19,9 @@ class server(common.internet_computer):
     def Connection_handler(self) -> None:
         self.Sock.listen(1)
         Sock, Addr = self.Sock.accept()
+        Client = client(Sock,Addr)
+
+        self.Active_connections.append(Client)
 
     
         #if(Sock.recv(self._Header) == self.AUTH_TOKEN):
