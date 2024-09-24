@@ -1,7 +1,7 @@
 import socket
 from sys import path
 path.append("../")
-from common import internet_computer
+from common import internet_computer,flags
 
 
 class client(internet_computer):

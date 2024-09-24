@@ -1,4 +1,4 @@
-from socket import socket
+import socket
 import pickle
 from enum import Enum
 
