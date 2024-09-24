@@ -1,5 +1,6 @@
 import socket
 import pickle
+import asyncio
 from enum import Enum
 
 class flags(Enum):
@@ -20,28 +21,6 @@ class internet_computer:
         self._PORT = PORT
         self._IP_FAMILY = socket.AF_INET
         self._PROTOCOL = socket.SOCK_STREAM
-
-    def recv(self,Sock: socket) -> tuple:
-        length:int = int(Sock.recv(self._Header))
-        data: str = Sock.recv(length)
-        
-        return (length, data)
-
-
-    # Protocol will first broadcast a header: size of data. This function pads out the header with ' ' to match expected size.
-    def Process_header(self, Size: int):
-        TARGETS = len(Size) - self._Header
-        DATA = str(self._Header)
-        return DATA.ljust(TARGETS)
-        
-    def Process_metadata(self,data):
-        Serialized_data = pickle.dumps(data)
-        myset:tuple = (len(Serialized_data),Serialized_data)
-        return myset
-    
-    
-    def Load_metadata(data):
-        return pickle.loads(data)
 
 
     def __del__(self) -> None:

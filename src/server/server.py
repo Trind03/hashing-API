@@ -28,6 +28,14 @@ class server(common.internet_computer):
             #print(f"Connections Established with verified client: {Addr}")
             #self.Active_connections.append((Sock,Addr))
 
+    def Check_data(self) -> None:
+        for i in range(len(self.Active_connections)):
+            print(self.Active_connections[i]._ID)
+
 
     def Running(self):
-        ...
+        while(self._Running):
+            if(len(self.Active_connections) > 0):
+                self.Check_data()
+            else:
+                self.Connection_handler()
