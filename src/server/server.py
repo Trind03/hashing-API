@@ -25,6 +25,7 @@ class server(common.internet_computer):
         Client = client(Sock,Addr,ID)
 
         self.Active_connections.append(Client)
+        self.Sock.send("5c304a425e04d1fcba6a43853e6b10ffe35c725dc0ccc1bec0be8194264e4f44c17163b57cdadd88573f4f5f51c378af0ea2440081a9f1c0056204e71f2682dbA".encode())
 
     
         #if(Sock.recv(self._Header) == self.AUTH_TOKEN):
