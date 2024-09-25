@@ -22,6 +22,12 @@ class internet_computer:
         self._IP_FAMILY = socket.AF_INET
         self._PROTOCOL = socket.SOCK_STREAM
 
+    def load_config(self,Filename:str):
+        try:
+            with open(Filename,'rb') as file:
+                config = pickle.load(file)
+                return config
+        except: print("Unexpected error from pickling")
 
     def __del__(self) -> None:
         self._IP = None

@@ -1,7 +1,7 @@
 import socket
 import sys
 import pickle
-import asyncio
+import time
 sys.path.append("../")
 import common
 
@@ -11,6 +11,7 @@ class client:
         self._ID: int = ID
         self._Sock = Sock
         self._Address = Addr
+        self._Size,self._Last_message = self.recv(Sock)
 
     # Protocol will first broadcast a header: size of data. This function pads out the header with ' ' to match expected size.
 

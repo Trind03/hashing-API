@@ -1,12 +1,14 @@
 import socket
 import sys
+import asyncio
 sys.path.append("../")
 import common
 from client import client
 
 class server(common.internet_computer): 
-    def __init__(self, IP_,PORT_) -> None:
-        super().__init__(IP_,PORT_)
+    def __init__(self,HOST,Port) -> None:
+
+        super().__init__(HOST,Port)
         self.Sock = socket.socket(self._IP_FAMILY,self._PROTOCOL)
         self.Sock.bind((self._IP,self._PORT))
         self._Running = True
@@ -17,9 +19,10 @@ class server(common.internet_computer):
         self.Sock.close()
 
     def Connection_handler(self) -> None:
+        ID = len(self.Active_connections) + 1
         self.Sock.listen(1)
         Sock, Addr = self.Sock.accept()
-        Client = client(Sock,Addr)
+        Client = client(Sock,Addr,ID)
 
         self.Active_connections.append(Client)
 
@@ -30,12 +33,13 @@ class server(common.internet_computer):
 
     def Check_data(self) -> None:
         for i in range(len(self.Active_connections)):
-            print(self.Active_connections[i]._ID)
+            print(self.Active_connections[len(self.Active_connections) - 1]._Last_message)
 
 
+
+            
     def Running(self):
         while(self._Running):
-            if(len(self.Active_connections) > 0):
-                self.Check_data()
-            else:
-                self.Connection_handler()
+
+            self.Connection_handler()
+            self.Check_data()
