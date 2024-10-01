@@ -14,6 +14,11 @@ class server:
         @self._APP.get("/")
         def broadcast():
             return {f"Error-404"}
+        
+        @self._APP.get("/algo")
+        def list_algo():
+            data = ["MD5","SHA256", "SHA1","SHA512"]
+            return data;
     
     def run(self):
         uvicorn.run(self._APP,host=self._HOST,port=self._PORT)
