@@ -4,3 +4,6 @@
 # Folders to be ignored
 src/__pycache__
 /src/server/__pycache__
+/src/client/__pycache__
+/.vscode
+/__pycache__
