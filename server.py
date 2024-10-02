@@ -4,12 +4,23 @@ import hashlib
 # Request format
 # addr:port/algorithm/value
 
-def process_data(data:str,Algorithm:str):
-    Hash: hashlib = hashlib()
+def process_data(data:str,Algorithm:str) -> str:
+    Hash: hashlib = hashlib
+    print(f"Hashing data for client using {Algorithm}: {data}")
+    match Algorithm.upper():
 
-    match Algorithm:
-
-        case "MD5"
+        case "MD5":
+            data = data.encode()
+            return {f"{Hash.md5(data).hexdigest()}"}
+        case "SHA256":
+            data = data.encode()
+            return {f"{Hash.sha256(data).hexdigest()}"}
+        case "SHA1":
+            data = data.encode()
+            return {f"{Hash.sha1(data).hexdigest()}"}
+        case "SHA512":
+            data = data.encode()
+            return {f"{Hash.sha512(data).hexdigest()}"}
 
 class server:
     def __init__(self,HOST,PORT) -> None:
@@ -23,10 +34,11 @@ class server:
         
         @self._APP.get("/algo")
         def list_algo():
-            data = ["MD5","SHA256", "SHA1","SHA512"]
-            return data;
+            return ["MD5","SHA256", "SHA1","SHA512"];
+    
         @self._APP.get("/{algorithm}/{data}")
-        def Process_data_ret():
-            ...
+        def Process_data_ret(algorithm:str,data:str):
+            return process_data(data,algorithm)
+        
     def Running(self):
         uvicorn.run(self._APP,host=self._HOST,port=self._PORT)
