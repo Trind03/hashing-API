@@ -29,15 +29,15 @@ class server:
         self._APP: FastAPI  = FastAPI()
 
         @self._APP.get("/")
-        def broadcast():
+        async def broadcast():
             return {f"Error-404"}
         
         @self._APP.get("/algo")
-        def list_algo():
+        async def list_algo():
             return ["MD5","SHA256", "SHA1","SHA512"];
     
         @self._APP.get("/{algorithm}/{data}")
-        def Process_data_ret(algorithm:str,data:str):
+        async def Process_data_ret(algorithm:str,data:str):
             return process_data(data,algorithm)
         
     def Running(self):
