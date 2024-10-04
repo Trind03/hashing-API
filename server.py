@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 import uvicorn
 import hashlib
 import uuid
@@ -25,31 +25,38 @@ def process_data(data:str,Algorithm:str) -> str:
 
 class server:
     def __init__(self,HOST,PORT) -> None:
-        self._Token = self.generate_token()
         self._HOST: str = HOST
         self._PORT: int = PORT
         self._APP: FastAPI  = FastAPI()
-        print(self._Token)
 
         @self._APP.get("/")
-        async def broadcast():
-            return {f"Error-404"}
+        async def empty_params(request: Request):
+            return f"{request.client.host}"
         
+        @self._APP.get("/new")
+        async def generate_token(self) -> None:
+            Token: uuid = str(uuid.uuid4())
+
+            #if()
+            
+
         @self._APP.get("/algo")
         async def list_algo():
             return ["MD5","SHA256", "SHA1","SHA512"];
     
-        @self._APP.get("/{algorithm}/{data}")
-        async def Process_data_ret(algorithm:str,data:str):
-            return process_data(data,algorithm)
+        @self._APP.get("/{token}/{algorithm}/{data}")
+        async def Process_data_ret(token,algorithm:str,data:str):
+            if(token == self._Token):
+                return process_data(data,algorithm)
+            else:
+                return "Invalid token :|"
         
     def Running(self):
         uvicorn.run(self._APP,host=self._HOST,port=self._PORT)
 
-    def generate_token(self) -> str:
-        Token: uuid = str(uuid.uuid4())
-        
-        return Token
     
     def validate_token(Token: str) -> None:
-        ...
+        with open("valid_keys.json") as File:
+                for Line in File:
+                    #if(Token)
+                    ...
