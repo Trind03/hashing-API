@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 import hashlib
+import uuid
 # Request format
 # addr:port/algorithm/value
 
@@ -24,9 +25,11 @@ def process_data(data:str,Algorithm:str) -> str:
 
 class server:
     def __init__(self,HOST,PORT) -> None:
+        self._Token = self.generate_token()
         self._HOST: str = HOST
         self._PORT: int = PORT
         self._APP: FastAPI  = FastAPI()
+        print(self._Token)
 
         @self._APP.get("/")
         async def broadcast():
@@ -42,3 +45,11 @@ class server:
         
     def Running(self):
         uvicorn.run(self._APP,host=self._HOST,port=self._PORT)
+
+    def generate_token(self) -> str:
+        Token: uuid = str(uuid.uuid4())
+        
+        return Token
+    
+    def validate_token(Token: str) -> None:
+        ...
